@@ -37,8 +37,8 @@ Route::resource('book', BookController::class);
 Route::resource('user', UserController::class);
 Route::resource('category', CategoryController::class);
 
-Route::get('category.edit/{id}',[CategoryController::class, 'edit']);
-Route::get('category.update',[CategoryController::class, 'update']);
+//Route::get('category.edit/{id}',[CategoryController::class, 'edit']);
+Route::post('/update',[CategoryController::class, 'update'])->name('update');
 
 
 Route::view('/login', 'identy.login')->name('login');

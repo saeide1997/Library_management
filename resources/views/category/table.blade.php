@@ -22,7 +22,7 @@
                     <i class="bx bx-dots-vertical-rounded"></i>
                 </button>
                 <div class="dropdown-menu">
-                    <button type="button" value="{{$category->id}}" class="dropdown-item ModalEdit"  > Edit</button>
+                    <button type="button" value="{{$category->id}}" class="dropdown-item ModalEdit" data-toggle="modal" data-target="#ModalEdit{{$category->id}}" > Edit</button>
                     <!-- <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a> -->
                     <form action="{{route('category.destroy',['category'=>$category->id])}}" method="post">
                         @csrf
@@ -37,67 +37,73 @@
             </div>
         </td>
     </tr>
+    @empty
+    @endforelse
 </tbody>
-@empty
-@endforelse
+
 </table>
 
-    <div class="modal fade text-left" id="ModalEdit" tabindex="-1" role="dialog" aria-hidden="true">
+
+@forelse ($categories as $category)
+    <div class="modal fade text-left" id="ModalEdit{{$category->id}}" tabindex="-1" role="dialog"
+        aria-labelledby="ModalEditLabel{{$category->id}}" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
+            < class="modal-content">
+                <form action="{{route('update')}}" method="post">
+                    @csrf
             <div class="modal-header">
-                <h4 class="modal-title">edit category</h4>
+                <h4 class="modal-title" id="ModalEditLabel{{$category->id}}" >edit category</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-            <form action="{{route('category.update',['category'=>$category->id])}}" method="post">
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="id" id="id" value="">
 
-                    <input type="text" name='Name' id="Name" value="" class="form-control mb-3" placeholder="Category Name"
+
+                <input type="hidden" name="id"  value="{{$category->id}}">
+
+                    <input type="text" name='Name' id="Name" value="{{$category->Name}}" class="form-control mb-3" placeholder="Category Name"
                            aria-label="Category Name"
                            aria-describedby="button-addon2">
-                    <input type="text" name='Details' id="Details" value="" class="form-control mb-3" placeholder="Category Detail"
+                    <input type="text" name='Details' id="Details" value="{{$category->Details}}" class="form-control mb-3" placeholder="Category Detail"
                            aria-label="Category Name" aria-describedby="button-addon2">
                     <button type="submit" class="btn btn-outline-success" id="button-addon2">edit</button>
-            </form>
-                </div>
+            </div>
+                </form>
             </div>
 
         </div>
-    </div>
 
 
+@empty
+@endforelse
 
 
 
 @endsection
 
-@push('scripts')
-<script>
-    $(document).ready(function (){
-        $(document).on('click','.ModalEdit', function (){
-            const id =$(this).val();
-            // alert(id);
-                $('#ModalEdit').modal('show');
-                $.ajax({
-                    type:"GET",
-                    url:"/category.edit/"+id,
+{{--@push('scripts')--}}
+{{--<script>--}}
+{{--    $(document).ready(function (){--}}
+{{--        $(document).on('click','.ModalEdit', function (){--}}
+{{--            const id =$(this).val();--}}
+{{--            // alert(id);--}}
+{{--                $('#ModalEdit').modal('show');--}}
+{{--                $.ajax({--}}
+{{--                    type:"GET",--}}
+{{--                    url:"/category.edit/"+id,--}}
 {{--                    {{route('category.edit',['category'=>$category->id])}}--}}
-                    success: function (response){
+{{--                    success: function (response){--}}
 
-                        $('#Name').val(response.category.Name);
-                        $('#Details').val(response.category.Details);
-
-
-                    }
-                })
+{{--                        $('#Name').val(response.category.Name);--}}
+{{--                        $('#Details').val(response.category.Details);--}}
 
 
-        });
-    });
-</script>
-@endpush
+{{--                    }--}}
+{{--                })--}}
+
+
+{{--        });--}}
+{{--    });--}}
+{{--</script>--}}
+{{--@endpush--}}
