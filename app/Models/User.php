@@ -17,7 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    public $timestamps = false;
+     protected $fillable = [
         'name',
         'email',
         'password',
@@ -38,8 +39,24 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    //     'password' => 'hashed',
+    // ];
+
+    public function admin(){
+        return $this->belongsTo(Admin::class);
+    }
+
+    public function borrowing(){
+        return $this->belongsTo(Borrowing::class);
+    }
+
+    public function returnn(){
+        return $this->belongsTo(Returnn::class);
+    }
+
+    
+
+
 }
