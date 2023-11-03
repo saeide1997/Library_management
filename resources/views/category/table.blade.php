@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
+    <a href="{{route('category.create')}}" class="btn btn-primary m-5 mb-0 p-3 " >Create New Category</a>
 
-<table class=" m-5" id='booktable'>
+
+<table class=" m-5 mt-0" id='booktable'>
 <thead> <tr>
     <th>Name</th>
     <th>Details</th>
@@ -22,7 +24,7 @@
                     <i class="bx bx-dots-vertical-rounded"></i>
                 </button>
                 <div class="dropdown-menu">
-                    <button type="button" value="{{$category->id}}" class="dropdown-item ModalEdit" data-toggle="modal" data-target="#ModalEdit{{$category->id}}" > Edit</button>
+                    <button type="button" value="{{$category->id}}" class="dropdown-item ModalEdit" data-bs-toggle="modal" data-bs-target="#ModalEdit{{$category->id}}" > Edit</button>
                     <!-- <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a> -->
                     <form action="{{route('category.destroy',['category'=>$category->id])}}" method="post">
                         @csrf
@@ -48,9 +50,10 @@
     <div class="modal fade text-left" id="ModalEdit{{$category->id}}" tabindex="-1" role="dialog"
         aria-labelledby="ModalEditLabel{{$category->id}}" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
-            < class="modal-content">
+            <div class="modal-content">
                 <form action="{{route('update')}}" method="post">
                     @csrf
+                    @method('PUT')
             <div class="modal-header">
                 <h4 class="modal-title" id="ModalEditLabel{{$category->id}}" >edit category</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -70,6 +73,8 @@
                     <button type="submit" class="btn btn-outline-success" id="button-addon2">edit</button>
             </div>
                 </form>
+
+                </div>
             </div>
 
         </div>
