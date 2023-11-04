@@ -44,7 +44,7 @@ Route::put('/update',[CategoryController::class, 'update'])->name('update');
 Route::view('/login', 'identy.login')->name('login');
 
 
-Route::view('/borrow', 'book.borrow');
+Route::get('/borrow', [\App\Http\Controllers\BorrowController::class,'index']);
 
 
 
