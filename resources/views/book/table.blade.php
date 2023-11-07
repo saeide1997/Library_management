@@ -1,23 +1,24 @@
 @extends('layouts.admin')
 
 @section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"> @endsection
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+@endsection
     @section('content') <table class="m-5" id='booktable'> <thead>
 <tr>
     <th>Book Name</th>
-    <th>Author </th> 
-    <th>Shelf-No </th> 
-    <th>Publish Date</th> 
+    <th>Author </th>
+    <th>Shelf-No </th>
+    <th>Publish Date</th>
     <th>Status</th>
     <th>Actions</th>
- </tr> 
+ </tr>
 </thead>
     @forelse ($books as $book)
     <tbody class="table-border-bottom-0">
 <tr>
     <td> <i class="fab fa-angular fa-lg text-danger me-3"></i> <span class="fw-medium">{{$book->Title}}</span>
-    </td> 
-    <td>{{$book->Author}}</td> 
+    </td>
+    <td>{{$book->Author}}</td>
     <td>{{$book->Shelf_no}}</td>
     <td>
     <i class="fab fa-angular fa-lg text-danger me-3"></i>

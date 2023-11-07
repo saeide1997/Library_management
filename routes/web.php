@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BorrowController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -44,8 +45,12 @@ Route::put('/update',[CategoryController::class, 'update'])->name('update');
 Route::view('/login', 'identy.login')->name('login');
 
 
-Route::view('/borrow', 'book.borrow');
+//Route::view('/borrow', 'book.borrow');
 
+Route::get('/borrow',[BorrowController::class,'selectBox']);
+Route::get('/borrows',[BorrowController::class,'insert'])->name('insert');
+
+Route::get('/d',[BorrowController::class,'d']);
 
 
 // Route::get('/login', function () {

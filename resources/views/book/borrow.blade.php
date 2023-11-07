@@ -3,25 +3,38 @@
 
 
 @section('content')
-    <form action="{{route('book.index')}}" method='GET'>
+    <form action="{{route('insert')}}" method='GET'>
         <div class="d-flex flex-row bd-highlight mb-3">
 
             <div class="p-3 m-3  bd-highlight" style="width: 45%">
-                <span>Member's Information</span>
-                <div class='flex-nowrap'>
-                    <input type="text" name="Title" id="" class='form-control mt-1 mb-4'
-                           placeholder='Search by Name...' value="{{request('Title')}}">
+                <span >Member's Information</span>
+                <div class='flex-nowrap mt-1 mb-3'>
+                    <select class="js-example-basic-single " style="width: 100%; " name="user">
+                        @forelse($users as $user)
+                            <option value="{{$user->userId}}">{{$user->Name}}</option>
+                        @empty
+                        @endforelse
+                    </select>
+
+                </div>
+                <div>
                     <span>Borrow Date</span><br>
-                    <input type="date" name="Date" class="form-control mt-1" id="">
+                    <input type="date" name="Date_borrowing" class="form-control mt-1" id="">
                 </div>
             </div>
             <div class="p-3 m-3 bd-highlight" style="width: 45%">
                 <span>Book's Name</span>
-                <div class='flex-nowrap'>
-                    <input type="text" name="Title" id="" class='form-control mt-1 mb-4'
-                           placeholder='Search by Title...' value="{{request('Title')}}">
+                <div class='flex-nowrap mt-1 mb-3'>
+                    <select class="js-example-basic-single-1 " style="width: 100%; " name="book">
+                        @forelse($books as $book)
+                            <option value="{{$book->bookId}}">{{$book->Title}}</option>
+                        @empty
+                        @endforelse
+                    </select>
+                </div>
+                <div>
                     <span>Return Date</span><br>
-                    <input type="date" name="Date" class="form-control mt-1" id="">
+                    <input type="date" name="Due_date" class="form-control mt-1" id="">
                 </div>
             </div>
         </div>
@@ -58,5 +71,14 @@
             <td></td>
         </tr>
         </tbody>
+
+        @endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+            $('.js-example-basic-single-1').select2();
+        });
+    </script>
 
 @endsection

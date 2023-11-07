@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('Author');
             $table->date('Date');
             $table->string('Category');
+
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('No Action');
             // $table->timestamps();
         });
     }
