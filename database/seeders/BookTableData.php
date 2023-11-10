@@ -14,6 +14,7 @@ class BookTableData extends Seeder
      */
     public function run(): void
     {
+
         $faker = Faker::create();
         foreach (range(1, 10) as $index) {
             DB::table('books')->insert([

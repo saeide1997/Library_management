@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BorrowController;
 
@@ -24,10 +25,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-});
+
 
 // });
 
@@ -47,8 +47,9 @@ Route::view('/login', 'identy.login')->name('login');
 
 //Route::view('/borrow', 'book.borrow');
 
-Route::get('/borrow',[BorrowController::class,'selectBox']);
+Route::get('/borrow',[BorrowController::class,'selectBox'])->name('borrow');
 Route::get('/borrows',[BorrowController::class,'insert'])->name('insert');
+Route::get('/borrowlist',[BorrowController::class,'index'])->name('borrowList');
 
 Route::get('/d',[BorrowController::class,'d']);
 

@@ -56,14 +56,23 @@ class BorrowController extends Controller
         ]);
         Borrowing::insert($data);
 
+        return redirect()->route('borrow');
+
     }
+
+
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $d=DB::table('users')->select('Name')->get();
+//dd($d);
+        $borrows=Borrowing::all()->replace(string,user_id,$d);
 
+        dd($borrows);
+        return view('borrow.table', compact($borrows));
     }
 
     /**
