@@ -23,19 +23,19 @@ class BorrowController extends Controller
     {
 
 
-        $user = DB::table('borrowings')
+        $users = DB::table('borrowings')
             ->rightJoin('users', 'borrowings.user_id', '=', 'users.id')
             ->whereNull('borrowings.id')
             ->select("borrowings.id", "users.id as userId", "users.Name")
             ->get();
 
-        $book = DB::table('borrowings')
+        $books = DB::table('borrowings')
             ->rightJoin('books', 'borrowings.book_id', '=', 'books.id')
             ->whereNull('borrowings.id')
             ->select("borrowings.id", "books.id as bookId", "books.Title")
             ->get();
 
-        return view('borrow.borrow', ['users' => $user, 'books' => $book]);
+        return view('borrow.borrow', ['users' => $users, 'books' => $books]);
     }
 
     public function insert(Request $request)
@@ -67,12 +67,12 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        $d=DB::table('users')->select('Name')->get();
-//dd($d);
-        $borrows=Borrowing::all()->replace(string,user_id,$d);
-
-        dd($borrows);
-        return view('borrow.table', compact($borrows));
+//        $d=DB::table('users')->select('Name')->get();
+////dd($d);
+        $borrows=Borrowing::all();
+//
+//        dd($borrows);
+        return view('borrow.table',['borrows'=>$borrows] );
     }
 
     /**

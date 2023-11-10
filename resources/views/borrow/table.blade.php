@@ -12,6 +12,9 @@
             background: rgba(76, 128, 246, 0.06);
             color: black;
         }
+        table{
+            margin: 5%;
+        }
 
         label {
             color: black;
@@ -27,61 +30,61 @@
 
 @section('content')
     <div class="container">
-        <table class="m-5" id='booktable'>
-            <thead>
-            <tr>
-                <th>.</th>
-                <th>Book Name</th>
-                <th>Author</th>
-                <th>Shelf-No</th>
-                <th>Publish Date</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            @forelse ($borrows as $borrow)
-                <tbody class="table-border-bottom-0">
-                <tr>
-                    <th>{{ $loop->iteration }}</th>
-                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <span
-                            class="fw-medium">{{$book->Title}}</span>
-                    </td>
-                    <td>{{$book->Author}}</td>
-                    <td>{{$book->Shelf_no}}</td>
-                    <td>
-                        <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                        <span class="fw-medium">{{$book->Date}}</span>
-                    </td>
-                    <td><span class="badge bg-label-primary me-1">Active</span></td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                    data-bs-toggle="dropdown">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{route('book.edit',['book'=>$book->id])}}"><i class="bx bx-edit-alt
-            m-3"></i> Edit</a>
-                                <!-- <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a> -->
-                                <form action="{{route('book.destroy',['book'=>$book->id])}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <div class='d-flex align-items-center'>
-                                        <i class="bx bx-edit-alt "></i><input type="submit" class="dropdown-item"
-                                                                              value="Delete">
+                <table  id='booktable'>
+                    <thead>
+                    <tr>
+                        <th>.</th>
+                        <th>User Name</th>
+                        <th>Book Name</th>
+                        <th>Borrow Date</th>
+                        <th>Return Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    @forelse ($borrows as $borrow)
+                        <tbody class="table-border-bottom-0">
+                        <tr>
+                            <th>{{ $loop->iteration }}</th>
+                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <span
+                                    class="fw-medium">{{$borrow->book_id}}</span>
+                            </td>
+                            <td>{{$borrow->user_id}}</td>
+                            <td>{{$borrow->Date_borrowing}}</td>
+                            <td>
+                                <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                <span class="fw-medium">{{$borrow->Due_date}}</span>
+                            </td>
+                            <td><span class="badge bg-label-primary me-1">Active</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown">
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#"><i class="bx bx-edit-alt
+                    m-3"></i> Edit</a>
+                                        <!-- <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a> -->
+                                        <form action="#" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class='d-flex align-items-center'>
+                                                <i class="bx bx-edit-alt "></i><input type="submit" class="dropdown-item"
+                                                                                      value="Delete">
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                @empty
-                @endforelse
-                </tbody>
+                                </div>
+                            </td>
+                        </tr>
+                        @empty
+                        @endforelse
+                        </tbody>
 
 
-        </table>
-    </div>
+                </table>
+            </div>
 @endsection
 
 @section('scripts')

@@ -204,7 +204,7 @@
             </div>
             <div class="content">
                 <h2>Borrows</h2>
-                <a href="{{route('borrow')}}">Borrowed Books</a>
+                <a href="{{route('borrowList')}}">Borrowed Books</a>
                 <a href="{{route('borrow')}}">Borrowing</a>
 
 
