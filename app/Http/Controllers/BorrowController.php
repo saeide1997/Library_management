@@ -35,7 +35,7 @@ class BorrowController extends Controller
             ->select("borrowings.id", "books.id as bookId", "books.Title")
             ->get();
 
-        return view('book.borrow', ['users' => $user, 'books' => $book]);
+        return view('borrow.borrow', ['users' => $user, 'books' => $book]);
     }
 
     public function insert(Request $request)
