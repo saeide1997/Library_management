@@ -193,7 +193,7 @@
             <div class="content">
                 <h2>Members</h2>
                 <a href="{{route('user.index')}}">Members List</a>
-                <a href="">Add Member</a>
+                <a href="{{route('user.create')}}">Add Member</a>
 
             </div>
         </div>

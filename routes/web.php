@@ -51,7 +51,7 @@ Route::get('/borrow',[BorrowController::class,'selectBox'])->name('borrow');
 Route::get('/borrows',[BorrowController::class,'insert'])->name('insert');
 Route::get('/borrowlist',[BorrowController::class,'index'])->name('borrowList');
 
-Route::get('/d',[BorrowController::class,'d']);
+//Route::get('/d',[BorrowController::class,'d']);
 
 
 // Route::get('/login', function () {

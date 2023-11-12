@@ -47,9 +47,9 @@
                         <tr>
                             <th>{{ $loop->iteration }}</th>
                             <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <span
-                                    class="fw-medium">{{$borrow->book_id}}</span>
+                                    class="fw-medium">{{$borrow->user->Name}}</span>
                             </td>
-                            <td>{{$borrow->user_id}}</td>
+                            <td>{{$borrow->book->Title}}</td>
                             <td>{{$borrow->Date_borrowing}}</td>
                             <td>
                                 <i class="fab fa-angular fa-lg text-danger me-3"></i>
@@ -71,7 +71,7 @@
                                             @method('DELETE')
                                             <div class='d-flex align-items-center'>
                                                 <i class="bx bx-edit-alt "></i><input type="submit" class="dropdown-item"
-                                                                                      value="Delete">
+                                                                                      value="Return">
                                             </div>
                                         </form>
                                     </div>

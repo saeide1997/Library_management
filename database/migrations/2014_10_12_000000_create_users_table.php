@@ -19,11 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('Phone');
             $table->rememberToken();
-            $table->timestamps();
+//            $table->timestamps();
 
-            $table->unsignedBigInteger('book_id');
 
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('No Action');
         });
     }
 

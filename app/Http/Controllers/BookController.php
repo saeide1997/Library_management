@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -36,7 +38,10 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        $books=Book::all();
+        $categories=DB::table('categories')->select('Name')->get();
+
+        return view('book.create',['books'=>$books, 'categories'=>$categories]);
     }
     /**
      * Store a newly created resource in storage.
@@ -49,8 +54,10 @@ class BookController extends Controller
             'Author' => 'required',
             'Date' => 'required',
             'Category' => 'required',
-            'Shelf_no' => 'required'
+            'Shelf_no' => 'required',
+
         ]);
+
 
 
         Book::create($data);
@@ -73,7 +80,8 @@ class BookController extends Controller
      */
     public function edit(string $id)
     {
-        return view('book.edit', ['book' => Book::findOrFail($id)]);
+        $categories=DB::table('categories')->select('Name')->get();
+        return view('book.edit', ['book' => Book::findOrFail($id),'categories'=>$categories]);
     }
 
     /**

@@ -22,7 +22,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('identy.register');
+        $users=User::all();
+        return view('identy.createUser',['users'=>$users]);
     }
 
     /**
@@ -31,12 +32,14 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data=$request->validate([
-            'name'=> 'required',
-            'email'=> 'required', 
-            'password'=> 'required'
+            'Name'=> 'required',
+            'Email'=> 'required',
+            'password'=> 'required',
+            'Gender'=>'required',
+            'Phone'=>'required'
         ]);
 
-            
+
             User::create($data);
             // return redirect()->route('book',$book);
 
@@ -56,7 +59,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('identy.editUser', ['user' => User::findOrFail($id)]);
     }
 
     /**
@@ -64,7 +67,19 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data=$request->validate([
+            'Name'=> 'required',
+            'Email'=> 'required',
+            'password'=> 'required',
+            'Gender'=>'required',
+            'Phone'=>'required'
+        ]);
+
+
+        User::findOrFail($id)->update($data);
+        // return redirect()->route('book',$book);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -72,6 +87,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrfail($id);
+        $user->delete();
+
+        return redirect()->route('user.index');
     }
 }

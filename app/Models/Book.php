@@ -19,9 +19,9 @@ class Book extends Model
     public function scopeTitle(Builder $query, string $title): Builder{
         return $query->where('title','like','%'. $title .'%');
     }
-    
+
     public function category(){
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function book(){
@@ -41,7 +41,7 @@ class Book extends Model
         return $this->belongsTo(Shelf::class);
     }
 
-    
+
     public function scopeBook(Builder $query):Builder {
         $query->get();
 

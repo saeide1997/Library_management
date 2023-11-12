@@ -19,9 +19,11 @@ class User extends Authenticatable
      */
     public $timestamps = false;
      protected $fillable = [
-        'name',
-        'email',
+        'Name',
+        'Email',
         'password',
+         'Gender',
+         'Phone'
     ];
 
     /**
@@ -56,7 +58,7 @@ class User extends Authenticatable
         return $this->belongsTo(Returnn::class);
     }
 
-    
+
 
 
 }
