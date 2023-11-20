@@ -50,9 +50,11 @@ Route::view('/login', 'identy.login')->name('login');
 Route::get('/borrow',[BorrowController::class,'selectBox'])->name('borrow');
 Route::get('/borrows',[BorrowController::class,'insert'])->name('insert');
 Route::get('/borrowlist',[BorrowController::class,'index'])->name('borrowList');
-
+Route::get('/borrowEdit/{borrow}',[BorrowController::class,'edit'])->name('borrowEdit');
+Route::put('/borrowUpdate/{borrow}',[BorrowController::class,'update'])->name('borrowUpdate');
+Route::delete('/borrowDelete/{borrow}',[BorrowController::class,'destroy'])->name('borrowDelete');
 //Route::get('/d',[BorrowController::class,'d']);
-
+Route::get('/return/{borrow}',[BorrowController::class,'return'])->name('return');
 
 // Route::get('/login', function () {
 //     return view('identy.login');

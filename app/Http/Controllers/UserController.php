@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Returnn;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -13,7 +15,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+//        $users = User::all();
+        $users=DB::table('returnns')->RightJoin('users','user_id','=','users.id')->get();
+
+//        dd($fines);
         return view('identy.table', ['users'=>$users]);
     }
 

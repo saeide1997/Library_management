@@ -12,7 +12,8 @@
             background: rgba(76, 128, 246, 0.06);
             color: black;
         }
-        table{
+
+        table {
             margin: 5%;
         }
 
@@ -30,61 +31,63 @@
 
 @section('content')
     <div class="container">
-                <table  id='booktable'>
-                    <thead>
-                    <tr>
-                        <th>.</th>
-                        <th>User Name</th>
-                        <th>Book Name</th>
-                        <th>Borrow Date</th>
-                        <th>Return Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    @forelse ($borrows as $borrow)
-                        <tbody class="table-border-bottom-0">
-                        <tr>
-                            <th>{{ $loop->iteration }}</th>
-                            <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <span
-                                    class="fw-medium">{{$borrow->user->Name}}</span>
-                            </td>
-                            <td>{{$borrow->book->Title}}</td>
-                            <td>{{$borrow->Date_borrowing}}</td>
-                            <td>
-                                <i class="fab fa-angular fa-lg text-danger me-3"></i>
-                                <span class="fw-medium">{{$borrow->Due_date}}</span>
-                            </td>
-                            <td><span class="badge bg-label-primary me-1">Active</span></td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#"><i class="bx bx-edit-alt
+        <table id='booktable'>
+            <thead>
+            <tr>
+                <th>.</th>
+                <th>User Name</th>
+                <th>Book Name</th>
+                <th>Borrow Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            @forelse ($borrows as $borrow)
+                <tbody class="table-border-bottom-0">
+                <tr>
+                    <th>{{ $loop->iteration }}</th>
+                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <span
+                            class="fw-medium">{{$borrow->user->Name}}</span>
+                    </td>
+                    <td>{{$borrow->book->Title}}</td>
+                    <td>{{$borrow->Date_borrowing}}</td>
+                    <td>
+                        <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                        <span class="fw-medium">{{$borrow->Due_date}}</span>
+                    </td>
+                    <td><span class="badge bg-label-primary me-1">Active</span></td>
+                    <td>
+                        <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                    data-bs-toggle="dropdown">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{route('borrowEdit',['borrow'=>$borrow->id])}}"><i class="bx bx-edit-alt
                     m-3"></i> Edit</a>
-                                        <!-- <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a> -->
-                                        <form action="#" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <div class='d-flex align-items-center'>
-                                                <i class="bx bx-edit-alt "></i><input type="submit" class="dropdown-item"
-                                                                                      value="Return">
-                                            </div>
-                                        </form>
+                                <a class="dropdown-item" href="{{route('return',['borrow'=>$borrow->id])}}"><i class="bx bx-edit-alt
+                    m-3"></i> Return</a>
+                                <!-- <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a> -->
+                                <form action="{{route('borrowDelete',['borrow'=>$borrow->id])}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <div class='d-flex align-items-center'>
+                                        <i class="bx bx-edit-alt "></i><input type="submit" class="dropdown-item"
+                                                                              value="Delete">
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        @endforelse
-                        </tbody>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                @endforelse
+                </tbody>
 
 
-                </table>
-            </div>
+        </table>
+    </div>
 @endsection
 
 @section('scripts')

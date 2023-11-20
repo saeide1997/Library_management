@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Borrowing;
+use App\Models\Returnn;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
@@ -104,7 +105,7 @@ class BorrowController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('borrow.editBorrow',['borrow'=> Borrowing::findOrFail($id)]);
     }
 
     /**
@@ -112,7 +113,22 @@ class BorrowController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $Due = $request->all()['Due_date'];
+        $borrowing = $request->all()['Date_borrowing'];
+        $user = json_decode($request->get('user'));
+        $book = json_decode($request->get('book'));
+
+
+        $data = ([
+            'book_id' => $book,
+            'user_id' => $user,
+            'Date_borrowing' => $borrowing,
+            'Due_date' => $Due,
+
+        ]);
+        Borrowing::findOrFail($id)->update($data);
+
+        return redirect()->route('borrowList');
     }
 
     /**
@@ -120,6 +136,45 @@ class BorrowController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $borrow=Borrowing::findOrFail($id);
+        $borrow->delete();
+        return redirect()->route('borrowList');
     }
+
+
+    public function return(Request $request ,string $id)
+    {
+        $Due = Borrowing::findOrFail($id);
+//        dd($Due);
+
+        $ldate = date('Y-m-d');
+        $diff = strtotime($Due->Due_date) - strtotime($ldate);
+//        dd( round($diff / 86400));
+
+        if ($diff<0){
+
+            $fine=(abs(round($diff/86400)))*1000;
+
+        }else{
+            $fine=0;
+        }
+
+
+
+
+        $data = ([
+            'borrowing_id'=>$Due->id,
+            'book_id' => $Due->book_id,
+            'user_id' => $Due->user_id,
+            'Date_returned' => $ldate,
+            'Due_date' => $Due->Due_date,
+            'Fine'=>$fine,
+
+        ]);
+        Returnn::insert($data);
+
+        return redirect()->route('borrowList');
+    }
+
+
 }

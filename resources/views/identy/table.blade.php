@@ -31,17 +31,24 @@
                 <th >.</th>
                 <th>username</th>
                 <th>email</th>
+                <th>fine</th>
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
             </thead>
-            @forelse ($users as $user)
+            @forelse ($users as $user )
+
                 <tbody class="table-border-bottom-0">
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <span class="fw-medium">{{$user->Name}}</span>
                     </td>
                     <td>{{$user->Email}}</td>
+                    @if($user->Fine==null)
+                    <td>Not Borrow</td>
+                    @else
+                        <td>{{$user->Fine}}</td>
+                    @endif
                     <td><span class="badge bg-label-primary me-1">Active</span></td>
                     <td>
                         <div class="dropdown">
