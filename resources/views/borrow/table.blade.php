@@ -56,7 +56,11 @@
                         <i class="fab fa-angular fa-lg text-danger me-3"></i>
                         <span class="fw-medium">{{$borrow->Due_date}}</span>
                     </td>
-                    <td><span class="badge bg-label-primary me-1">Active</span></td>
+                    @if($borrow->Due_date < date('Y-m-d'))
+                        <td><span class="badge bg-label-success me-1">Active</span></td>
+                    @else
+                        <td><span class="badge bg-label-danger me-1">expired</span></td>
+                    @endif
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -64,17 +68,16 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{route('borrowEdit',['borrow'=>$borrow->id])}}"><i class="bx bx-edit-alt
-                    m-3"></i> Edit</a>
-                                <a class="dropdown-item" href="{{route('return',['borrow'=>$borrow->id])}}"><i class="bx bx-edit-alt
-                    m-3"></i> Return</a>
+                                <a class="dropdown-item" href="{{route('borrowEdit',['borrow'=>$borrow->id])}}">
+                                    Edit</a>
+                                <a class="dropdown-item" href="{{route('return',['borrow'=>$borrow->id])}}">Return</a>
                                 <!-- <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a> -->
                                 <form action="{{route('borrowDelete',['borrow'=>$borrow->id])}}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <div class='d-flex align-items-center'>
-                                        <i class="bx bx-edit-alt "></i><input type="submit" class="dropdown-item"
-                                                                              value="Delete">
+                                        <input type="submit" class="dropdown-item"
+                                               value="Delete">
                                     </div>
                                 </form>
                             </div>

@@ -11,6 +11,10 @@
             background: rgba(76, 128, 246, 0.06);
             color: black;
         }
+        .dropdown-menu{
+            background: rgb(218, 226, 243);
+
+        }
 
         label {
             color: black;
@@ -32,7 +36,6 @@
                 <th>username</th>
                 <th>email</th>
                 <th>fine</th>
-                <th>Status</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -45,24 +48,23 @@
                     </td>
                     <td>{{$user->Email}}</td>
                     @if($user->Fine==null)
-                    <td>Not Borrow</td>
+                    <td><span class="badge bg-label-success me-1">Clear</span></td>
                     @else
-                        <td>{{$user->Fine}}</td>
+                        <td><span class="badge bg-label-warning me-1">${{$user->Fine}}</span></td>
                     @endif
-                    <td><span class="badge bg-label-primary me-1">Active</span></td>
+
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{route('user.edit',['user'=>$user->id])}}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                            <div class="dropdown-menu ">
+                                <a class="dropdown-item" href="{{route('user.edit',['user'=>$user->id])}}"> Edit</a>
                                 <!-- <a href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a> -->
                                 <form action="{{route('user.destroy',['user'=>$user->id])}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" class="dropdown-item" value="Delete"><i
-                                        class="bx bx-trash me-1"></i>
+                                    <input type="submit" class="dropdown-item" value="Delete">
                                 </form>
                             </div>
                         </div>

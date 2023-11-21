@@ -9,7 +9,8 @@ class Borrowing extends Model
 {
     use HasFactory;
 
-
+    protected $fillable = ['book_id','user_id'];
+    public $timestamps=false;
     public function user(){
         return $this->belongsTo(User::class);
     }

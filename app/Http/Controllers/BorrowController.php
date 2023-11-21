@@ -71,9 +71,16 @@ class BorrowController extends Controller
 //        $d=DB::table('users')->select('Name')->get();
 ////dd($d);
         $borrows=Borrowing::all();
+//        dd($borrows->Due_date);
+        $ldate = date('Y-m-d');
+
+//        dd( round($diff / 86400));
+
+
+
 //
 //        dd($borrows);
-        return view('borrow.table',['borrows'=>$borrows] );
+        return view('borrow.table',['borrows'=>$borrows, $ldate] );
     }
 
     /**
@@ -172,6 +179,7 @@ class BorrowController extends Controller
 
         ]);
         Returnn::insert($data);
+        Borrowing::find($id)->delete();
 
         return redirect()->route('borrowList');
     }

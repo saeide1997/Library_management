@@ -23,13 +23,19 @@ class BookController extends Controller
             return $query->title($title);
         })->get();
 
+
+        $boooks=DB::table('borrowings')
+            ->RightJoin('books', 'book_id','=','books.id')
+            ->get();
+
+
         // $books = Book::all();
 
         // $data = [
         //     'books' => $books
         // ];
 
-        return view('book.table', ['books' => $books]);
+        return view('book.table', ['boooks' => $boooks]);
 
     }
 
